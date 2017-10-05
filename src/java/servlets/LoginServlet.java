@@ -44,20 +44,22 @@ public class LoginServlet extends HttpServlet {
             
             String action = request.getParameter("action");
             if(action != null && action.equals("logout")){
-                request.setAttribute("error", true);
-                request.setAttribute("logOutMessage", "You have successfully logged out.");
                 session.invalidate();
+                request.setAttribute("error", true);
+                Cookie[] cookies = request.getCookies();
+                request.setAttribute("username", getCookieValue(cookies, "LoggedIn"));
+                request.setAttribute("logOutMessage", "You have successfully logged out.");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-                //response.sendRedirect("login");
                 return;
             }
             
             if(user != null){
                 response.sendRedirect("home");
-            } else {
+            } 
+            
+            if(user == null){
                 Cookie[] cookies = request.getCookies();
                 request.setAttribute("username", getCookieValue(cookies, "LoggedIn"));
-                //response.sendRedirect("login");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             }
             
@@ -82,9 +84,6 @@ public class LoginServlet extends HttpServlet {
             if(checkboxValue != null){
                 Cookie myCookie = new Cookie("LoggedIn", username);
                 response.addCookie(myCookie);
-                Cookie[] cookies = request.getCookies();
-                String Login = 
-                        CookieUtil.getCookieValue(cookies, "Login");
                 request.setAttribute("username", username);
                 response.sendRedirect("home");
                 //getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
