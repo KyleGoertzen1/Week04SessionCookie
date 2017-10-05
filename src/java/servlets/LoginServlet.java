@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
             
             if(user != null){
                 response.sendRedirect("home");
-            } 
+            }
             
             if(user == null){
                 Cookie[] cookies = request.getCookies();
