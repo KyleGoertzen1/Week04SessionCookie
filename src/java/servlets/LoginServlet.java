@@ -17,7 +17,10 @@ import login.User;
 import utilities.CookieUtil;
 
 /**
- *
+ * Since the URL is coded to stop the user from going into the home page with
+ * out logging in or going to the login when you already logged in we have to
+ * use an action in our <a href> tag. This is done with
+ * <a href=login?action=logout>Logout</a>
  * @author 729347
  */
 public class LoginServlet extends HttpServlet {
