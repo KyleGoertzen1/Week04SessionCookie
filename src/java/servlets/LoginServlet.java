@@ -44,8 +44,8 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("error", true);
                 request.setAttribute("logOutMessage", "Logged out");
                 session.invalidate();
-                //getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-                response.sendRedirect("login");
+                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                //response.sendRedirect("login");
                 return;
             }
             
@@ -54,7 +54,6 @@ public class LoginServlet extends HttpServlet {
             } else {
                 Cookie[] cookies = request.getCookies();
                 request.setAttribute("username", getCookieValue(cookies, "LoggedIn"));
-                request.setAttribute("error", true);
                 //response.sendRedirect("login");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             }

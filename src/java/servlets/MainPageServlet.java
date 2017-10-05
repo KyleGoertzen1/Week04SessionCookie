@@ -42,7 +42,7 @@ public class MainPageServlet extends HttpServlet {
             {
                 Cookie[] cookies = request.getCookies();
                 request.setAttribute("username", getCookieValue(cookies, "LoggedIn"));
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                response.sendRedirect("login");
                 return;
             }
     }
